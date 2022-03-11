@@ -3,7 +3,7 @@
 //
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
-import { ethers } from "hardhat";
+const hre = require("hardhat");
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -14,17 +14,25 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const Greeter = await ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
+  const Burnable = await ethers.getContractFactory("Burnable");
+  const burnable = await Burnable.deploy();
 
-  await greeter.deployed();
+  await burnable.deployed();
 
-  console.log("Greeter deployed to:", greeter.address);
+  // const Burnable = await ethers.getContractFactory("Burnable");
+  // const c = await Burnable.attach("0xe7f1725e7734ce288f8367e1bb143e90bb3f0512")
+  // const url =
+  //   "https://ipfs.infura.io/ipfs/QmQpCpJgeMZ8UDqGgtkZX7PeoxLmyh2BcWBA28GXM9bYND";
+  // await contract.mintBurnable(url, { value: ethers.utils.parseEther("1") });
+
+  console.log("Burnable deployed to:", burnable.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

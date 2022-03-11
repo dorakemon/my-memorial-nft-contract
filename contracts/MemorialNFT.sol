@@ -1,9 +1,9 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.2/contracts/token/ERC721/ERC721.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.2/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.2/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract Burnable is ERC721URIStorage {
 
@@ -42,11 +42,5 @@ contract Burnable is ERC721URIStorage {
         // mint時に払った0.01etherを返す処理
         address payable receiver = payable(msg.sender);
         receiver.transfer(MINT_PRICE);
-    }
-}
-
-    function setGreeting(string memory _greeting) public {
-        console.log("Changing greeting from '%s' to '%s'", greeting, _greeting);
-        greeting = _greeting;
     }
 }
